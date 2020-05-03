@@ -1,0 +1,11 @@
+.toolbar{
+  justify-content: space-between;
+  min-height:55px;
+  max-height:55px;
+}
+.name{
+  font-size:17px !important;
+}
+.buttons{
+  font-size:12px !important;
+}
