@@ -22,7 +22,7 @@ Router.post("/register",(req,res)=>{
     });
     User.registeruser(NewUser,(err)=>{
         if(err){
-            res.json({state:false,msg:"Failed to Register!"});
+            res.json({state:false,msg:"Failed To Register!"});
         }
         else{
             res.json({state:true,msg:"Successfully Registered!"});
@@ -35,13 +35,12 @@ Router.post("/login",(req,res)=>{
     const email=req.body.email;
     const password=req.body.password;
     User.getuserbyemail(email,(err,user)=>{
-        if(err) throw err;
         if(user){
             User.checkpassword(password,user.password,(err,match)=>{
                 if(err) throw err;
                 if(match){
-                    const token=JsonWebToken.sign(user.toJSON(),Config.secret,{expiresIn:30});
-                    res.json({state:true,msg:"Have a Great Day "+user.username+"!",token:"Bearer "+token}); 
+                    const token=JsonWebToken.sign(user.toJSON(),Config.secret,{expiresIn:3000});
+                    res.json({state:true,msg:"Have A Great Day "+user.userName+"!",token:"Bearer "+token});
                 }
                 else{
                     res.json({state:false,msg:"Wrong Password!"});

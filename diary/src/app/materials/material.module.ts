@@ -3,14 +3,20 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatSidenavModule,
+  MatCardModule,
+  MatGridListModule
 } from '@angular/material';
 
 const materials=[
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatSidenavModule,
+  MatCardModule,
+  MatGridListModule
 ];
 
 @NgModule({

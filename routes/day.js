@@ -27,7 +27,7 @@ Router.post("/write",(req,res)=>{
     });
     Day.write(NewDay,(err,user)=>{
         if(err){
-            res.json({state:false,msg:"Failed to Save!"});
+            res.json({state:false,msg:"Failed To Save!"});
         }
         else{
             res.json({state:true,msg:"Successfully Saved!"});
