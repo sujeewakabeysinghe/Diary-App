@@ -13,16 +13,9 @@ Router.use(function(req, res, next) {
 
 
 Router.post("/write",(req,res)=>{
-    const ts=Date.now();
-    const obj=new Date(ts);
-    const date=obj.getDate();
-    const month=obj.getMonth();
-    const year=obj.getFullYear();
     const NewDay=new Day({
         userId:req.body.userId,
-        date:date,
-        month:month,
-        year:year,
+        date:req.body.date,
         notes:req.body.notes
     });
     Day.write(NewDay,(err,user)=>{

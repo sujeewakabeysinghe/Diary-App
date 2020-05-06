@@ -16,10 +16,10 @@ Router.post("/createcontact",(req,res)=>{
     const NewContact=new Contact({
         userId:req.body.userId,
         firstName:req.body.firstName,
-        lastName:req.body.LastName,
+        lastName:req.body.lastName,
         company:req.body.company,
         mobileNo:req.body.mobileNo,
-        landPhoneNo:req.body.LandPhoneNo,
+        landPhoneNo:req.body.landPhoneNo,
         officeNo:req.body.officeNo,
         email:req.body.email,
         website:req.body.website,
@@ -27,6 +27,7 @@ Router.post("/createcontact",(req,res)=>{
         notes:req.body.notes
     });
     Contact.createcontact(NewContact,(err,user)=>{
+        console.log(NewContact);
         if(err){
             res.json({state:false,msg:"Failed To Save!"});
         }

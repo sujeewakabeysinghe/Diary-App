@@ -3,21 +3,21 @@
   <div>
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Username</mat-label>
-      <input matInput placeholder="Ex : Smith" type="text" name="username" [(ngModel)]="userName">
+      <input matInput placeholder="Ex : Smith" type="text" name="username" [(ngModel)]="userName" required>
       <!--<mat-hint>Hint</mat-hint>-->
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>E-Mail</mat-label>
-      <input matInput placeholder="Ex : Smith@gmail.com" type="email" name="email" [(ngModel)]="email">
+      <input matInput placeholder="Ex : Smith@gmail.com" type="email" name="email" [(ngModel)]="email" required>
       <!--<mat-hint>Hint</mat-hint>-->
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Minimum Characters" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="password">
+      <input matInput placeholder="Minimum Characters" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="password" required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
       <!--<mat-hint>Hint</mat-hint>-->
     </mat-form-field>

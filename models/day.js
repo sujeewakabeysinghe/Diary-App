@@ -5,8 +5,6 @@ const Schema=Mongoose.Schema;
 const Day=new Schema({
     userId:{type:String,required:true},
     date:{type:String,required:true},
-    month:{type:String,required:true},
-    year:{type:String,required:true},
     notes:{type:String,required:true}
 });
 

@@ -1,13 +1,12 @@
 <mat-toolbar color="primary" class="toolbar" class.mat-elevation-z2>
   <div>
-    <span><button class="name" mat-flat-button disableRipple routerLink="/home">D I A R Y</button></span>
+    <span><button class="name" mat-flat-button disableRipple routerLink="/home" *ngIf="!authservice.isloggedin()">D I A R Y</button></span>
+    <span><button class="buttons" mat-flat-button routerLink="/profile" *ngIf="authservice.isloggedin()">{{userName|uppercase}}</button></span>
   </div>
   <div>
     <span><button class="buttons" mat-flat-button routerLink="/register" *ngIf="!authservice.isloggedin()">Register</button></span>
     <span *ngIf="!authservice.isloggedin()"> | </span>
     <span><button class="buttons" mat-flat-button routerLink="/login" *ngIf="!authservice.isloggedin()">Login</button></span>
-    <span><button class="buttons" mat-flat-button routerLink="/profile" *ngIf="authservice.isloggedin()">Profile</button></span>
-    <span *ngIf="authservice.isloggedin()"> | </span>
     <span><button class="buttons" mat-flat-button routerLink="/home" *ngIf="authservice.isloggedin()" (click)="logout()">Logout</button></span>
   </div>
 </mat-toolbar>

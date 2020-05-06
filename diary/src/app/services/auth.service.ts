@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   loguser(user:any){
-    //console.log(user);
     let headers=new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/user/login',user,{headers:headers}).pipe(map(res=>res.json()));
@@ -42,6 +41,32 @@ export class AuthService {
     let headers=new Headers();
     headers.append('Authorization',token);
     return this.http.get('http://localhost:3000/user/profile',{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  writeday(day:any){
+    let headers=new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/day/write',day,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  readday(){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    return this.http.get('http://localhost:3000/day/read',{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  readcontact(){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    return this.http.get('http://localhost:3000/contact/readcontact',{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  createcontact(contact:any){
+    let headers=new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/contact/createcontact',contact,{headers:headers}).pipe(map(res=>res.json()));
   }
 
 }
