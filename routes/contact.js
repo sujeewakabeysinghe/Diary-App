@@ -27,7 +27,6 @@ Router.post("/createcontact",(req,res)=>{
         notes:req.body.notes
     });
     Contact.createcontact(NewContact,(err,user)=>{
-        console.log(NewContact);
         if(err){
             res.json({state:false,msg:"Failed To Save!"});
         }

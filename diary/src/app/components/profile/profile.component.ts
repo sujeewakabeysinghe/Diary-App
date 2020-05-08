@@ -10,8 +10,12 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
+  iconname=true;
+  pickdate:string;
   show:string;
   userId:string;
+  userName:string;
+  userEmail:string;
   date:string;
   today:Date=new Date();
   notes:string;
@@ -27,6 +31,9 @@ export class ProfileComponent implements OnInit {
   website:string;
   address:string;
   note:string;
+  editedUserName:string;
+  hasMemo:boolean;
+  readMemo:any;
 
   constructor(
     private authservice:AuthService,
@@ -37,10 +44,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.authservice.getuser().subscribe(res=>{
       this.userId=res.user._id;
+      this.userName=res.user.userName;
+      this.userEmail=res.user.email;
+      this.hasMemo=res.user.hasMemo;
     });
     this.date=this.today.toISOString();
     this.date=this.date.slice(0,10);
-    this.show="write"
+    this.show="write";
   }
 
   write(){
@@ -172,10 +182,107 @@ export class ProfileComponent implements OnInit {
 
 
   memo(){
-    this.show="memo"
+    if(this.hasMemo){
+      this.show="readmemo";
+    }
+    else{
+      this.show="memo";
+    }
   }
+  memocreate(){
+    this.hasMemo=true;
+    const memo={
+      userId:this.userId,
+      hasMemo:this.hasMemo
+    }
+    const memoCreate={
+      userId:this.userId
+    }
+    this.authservice.edithasmemo(memo).subscribe(res=>{
+      if(res.state){
+        this.authservice.creatememo(memoCreate).subscribe(res=>{
+          if(res.state){
+            this.flashmessage.showFlashMessage({
+              messages: [res.msg],
+              dismissible: false,
+              timeout: 2000,
+              type: 'success'
+            });
+            this.readmemo();
+          }
+          else{
+            this.flashmessage.showFlashMessage({
+              messages: [res.msg],
+              dismissible: false,
+              timeout: 2000,
+              type: 'warning'
+            });
+          }
+        });
+      }
+      else{
+        this.flashmessage.showFlashMessage({
+          messages: [res.msg],
+          dismissible: false,
+          timeout: 2000,
+          type: 'warning'
+        });
+      }
+    });
+  }
+  readmemo(){
+    this.show="readmemo";
+    this.authservice.readmemo().subscribe(res=>{
+      this.readMemo=res.memo;
+      console.log(res.memo);
+    });
+  }
+
+
+
+
   profile(){
     this.show="profile";
+    this.editedUserName="";
+  }
+  editprofile(){
+    this.show="editprofile";
+  }
+  saveprofile(){
+    const editUser={
+      userId:this.userId,
+      userName:this.editedUserName
+    }
+    if(editUser.userId==undefined || editUser.userName.indexOf(' ')>=0 || editUser.userName==""){
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill Username!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else{
+      this.authservice.editprofile(editUser).subscribe(res=>{
+        if(res.state){
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
+          this.userName=this.editedUserName;
+          this.profile();
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
   }
 
 }

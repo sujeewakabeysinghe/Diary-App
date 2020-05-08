@@ -17,6 +17,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 const AppRoutes:Routes=[
   {path:'login',component:LoginComponent},
@@ -42,11 +43,14 @@ const AppRoutes:Routes=[
     FormsModule,
     HttpClientModule,
     HttpModule,
-    NgFlashMessagesModule.forRoot()
+    NgFlashMessagesModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService,
-    GuardService
+    GuardService,
+    MatDatepickerModule
   ],
   bootstrap: [
     AppComponent

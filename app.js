@@ -7,6 +7,7 @@ const Passport=require("passport");
 const User=require("./routes/user");
 const Contact=require("./routes/contact");
 const Day=require("./routes/day");
+const Memo=require("./routes/memo");
 const PassportJwt=require("./config/passportjwt")(Passport);
 const cors=require("cors");
 
@@ -21,7 +22,8 @@ App.use(Passport.initialize());
 App.use(Passport.session());
 App.use("/user",User);
 App.use("/contact",Contact);
-App.use("/day",Day)
+App.use("/day",Day);
+App.use("/memo",Memo);
 App.use(Express.static(Path.join(__dirname,"public")));
 App.use(cors());
 

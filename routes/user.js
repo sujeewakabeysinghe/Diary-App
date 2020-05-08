@@ -58,5 +58,32 @@ Router.get("/profile",Passport.authenticate('jwt',{session:false}),(req,res)=>{
     res.json({user:req.user});
 });
 
+Router.post("/editprofile",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const userId=req.body.userId;
+    const userName=req.body.userName;
+    User.editprofile(userId,userName,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Update!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
 
-module.exports=Router;
+
+Router.post("/edithasmemo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const userId=req.body.userId;
+    const hasMemo=req.body.hasMemo;
+    User.edithasmemo(userId,hasMemo,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Create!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
+
+
+module.exports=Router; 

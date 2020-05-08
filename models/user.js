@@ -6,7 +6,8 @@ const Schema=Mongoose.Schema;
 const User=new Schema({
     userName:{type:String,required:true},
     email:{type:String,required:true},
-    password:{type:String,required:true}
+    password:{type:String,required:true},
+    hasMemo:{type:Boolean,required:true}
 });
 
 
@@ -18,6 +19,7 @@ module.exports.registeruser=function(user,callback){
         Bcrypt.hash(user.password,salt,(err,hash)=>{
             if(err) throw err;
             user.password=hash;
+            user.hasMemo=false;
             user.save(callback);
         });
     });
@@ -46,4 +48,16 @@ module.exports.checkpassword=function(password,hash,callback){
 
 module.exports.getuserbyid=function(id,callback){
     Users.findById(id,callback);
+};
+
+module.exports.editprofile=function(id,userName,callback){
+    const query1={_id:id};
+    const query2={userName:userName};
+    Users.findOneAndUpdate(query1,query2,callback);
+};
+
+module.exports.edithasmemo=function(id,hasMemo,callback){
+    const query1={_id:id};
+    const query2={hasMemo:hasMemo};
+    Users.findOneAndUpdate(query1,query2,callback);
 };

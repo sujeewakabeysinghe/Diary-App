@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="toolbar" class.mat-elevation-z2>
   <div>
     <span><button class="name" mat-flat-button disableRipple routerLink="/home" *ngIf="!authservice.isloggedin()">D I A R Y</button></span>
-    <span><button class="buttons" mat-flat-button routerLink="/profile" *ngIf="authservice.isloggedin()">{{userName|uppercase}}</button></span>
+    <span><button class="name" mat-icon-button routerLink="/profile" *ngIf="authservice.isloggedin()"><mat-icon>person_pin</mat-icon></button></span>
   </div>
   <div>
     <span><button class="buttons" mat-flat-button routerLink="/register" *ngIf="!authservice.isloggedin()">Register</button></span>

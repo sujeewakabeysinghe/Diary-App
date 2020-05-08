@@ -27,19 +27,20 @@
       </button>
     </div>
   </mat-drawer>
-  <button class="button" mat-icon-button disableRipple color="primary" (click)="drawer.toggle()">
-    <mat-icon>view_list</mat-icon>
+  <button class="buttonT" mat-icon-button disableRipple color="primary" (click)="drawer.toggle()">
+    <mat-icon (click)="iconname = !iconname">{{iconname ? 'menu' : 'menu_open'}}</mat-icon>
   </button>
   <button *ngIf="show=='contacts'" class="button" mat-icon-button color="primary"  (click)='createcontact()'>
     <mat-icon>add_ic_call</mat-icon>
   </button>
+
   <!--write-->
   <div *ngIf="show=='write'">
     <mat-card class="card">
       <mat-card-content>
-        <mat-form-field class="write" appearance="fill">
+        <mat-form-field class="write">
           <mat-label>{{date}}</mat-label>
-          <textarea matInput type="text" name="day" [(ngModel)]="notes" required></textarea>
+          <textarea matInput placeholder="How's Today?" type="text" name="day" [(ngModel)]="notes" required></textarea>
         </mat-form-field>
       </mat-card-content>
       <button mat-icon-button (click)='writeday()'>
@@ -54,8 +55,10 @@
   <div *ngIf="show=='read'">
     <mat-card class="card" *ngFor="let days of day">
       <mat-card-content>
-        <mat-card-subtitle class="date">{{days.date}}</mat-card-subtitle>
-        <p>{{days.notes}}</p>
+        <mat-card-subtitle class="date">{{days.date}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <p>{{days.notes}}</p>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -63,16 +66,17 @@
   <div *ngIf="show=='contacts'">
     <mat-card class="card" *ngFor="let contacts of contact">
       <mat-card-content>
-        <mat-card-subtitle class="date">{{contacts.firstName}}</mat-card-subtitle>
-        <p>{{contacts.lastName}}</p>
-        <p>{{contacts.mobileNo}}</p>
-        <p>{{contacts.landPhoneNo}}</p>
-        <p>{{contacts.officeNo}}</p>
-        <p>{{contacts.email}}</p>
-        <p>{{contacts.address}}</p>
-        <p>{{contacts.company}}</p>
-        <p>{{contacts.website}}</p>
-        <p>{{contacts.notes}}</p>
+        <mat-card-subtitle class="date">{{contacts.firstName}} {{contacts.lastName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <p>Mobile Number : {{contacts.mobileNo}}</p>
+          <p>Land Phone Number : {{contacts.landPhoneNo}}</p>
+          <p>Office Number : {{contacts.officeNo}}</p>
+          <p>E-Mail : {{contacts.email}}</p>
+          <p>Address : {{contacts.address}}</p>
+          <p>Company : {{contacts.company}}</p>
+          <p>Website : {{contacts.website}}</p>
+          <p>Notes : {{contacts.notes}}</p>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -81,7 +85,6 @@
     <mat-card class="card">
       <mat-card-content>
         <form class="example-form">
-          <div class="mat-heading"><p>R E G I S T E R</p></div>
           <div>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>First Name</mat-label>
@@ -162,32 +165,63 @@
       </button>
     </mat-card>
   </div>
-
-
-
-
-
-
-
-
-
-  <!--<div *ngIf="show=='contacts'">
+  <!--memo-->
+  <div *ngIf="show=='memo'">
     <mat-card class="card">
-      <mat-card-header>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
       <mat-card-content>
-        <mat-form-field class="write" appearance="fill">
-          <mat-label>Textarea</mat-label>
-          <textarea matInput></textarea>
-        </mat-form-field>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <p>no memo</p>
+        </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
+      <button mat-icon-button *ngIf="!hasMemo"  (click)='memocreate()'>
+        <mat-icon>done</mat-icon>
+      </button>
     </mat-card>
-  </div>-->
+  </div>
+  <div *ngIf="show=='readmemo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <p>has memo<button mat-icon-button>
+          <mat-icon>build</mat-icon>
+        </button></p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!--profile-->
+  <div *ngIf="show=='profile'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userEmail}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <p>{{userName}}</p>
+      </mat-card-content>
+      <button mat-icon-button  (click)='editprofile()'>
+        <mat-icon>build</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editprofile'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userEmail}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Ex : Smith" type="text" name="editedUserName" [(ngModel)]="editedUserName" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='saveprofile()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='profile()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+
+
 
 </mat-drawer-container>

@@ -69,4 +69,33 @@ export class AuthService {
     return this.http.post('http://localhost:3000/contact/createcontact',contact,{headers:headers}).pipe(map(res=>res.json()));
   }
 
+  editprofile(user:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/user/editprofile',user,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  edithasmemo(user:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/user/edithasmemo',user,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  creatememo(memo:any){
+    let headers=new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/creatememo',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  readmemo(){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    return this.http.get('http://localhost:3000/memo/readmemo',{headers:headers}).pipe(map(res=>res.json()));
+  }
+
 }
