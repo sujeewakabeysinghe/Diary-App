@@ -13,7 +13,7 @@ const cors=require("cors");
 
 
 const App=Express();
-const connection=Mongoose.connect(Config.database,{useUnifiedTopology: true,useNewUrlParser: true});
+const connection=Mongoose.connect(Config.database,{useUnifiedTopology: true,useNewUrlParser: true,useFindAndModify:false});
 const port=3000;
 
 
