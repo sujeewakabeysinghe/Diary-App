@@ -273,7 +273,7 @@
   </div>
   <!--readmemo-->
   <div *ngIf="show=='readmemo'">
-    <mat-card class="card">
+    <mat-card class="card" *ngFor="let readMemo of readMemo">
       <mat-card-content>
         <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
         <div>

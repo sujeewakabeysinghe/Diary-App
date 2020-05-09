@@ -41,7 +41,6 @@ Router.post("/creatememo",(req,res)=>{
 
 
 Router.get("/readmemo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
-    console.log("works!");
     Memo.getmemobyuserid(req.user._id,(err,memos)=>{
         if(err) throw err;
         res.json({state:true,memo:memos});

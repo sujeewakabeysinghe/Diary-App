@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   note:string;
   editedUserName:string;
   hasMemo:boolean;
+
   readMemo:any;
 
   mobileNoM:string;
@@ -268,12 +269,9 @@ export class ProfileComponent implements OnInit {
     }
   }
   readmemo(){
-    console.log("read works!");
     this.show="readmemo";
     this.authservice.readmemo().subscribe(res=>{
-      console.log(res);
-      this.readMemo=res.memo[0];
-      console.log(this.readMemo);
+      this.readMemo=res.memo;
     });
   }
   clearmemo(){
