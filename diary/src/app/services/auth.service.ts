@@ -107,7 +107,6 @@ export class AuthService {
   }
 
   editmemoLandPhoneNo(memo:any){
-    console.log("workafsffa")
     const token=localStorage.getItem('Token');
     let headers=new Headers();
     headers.append('Authorization',token);
