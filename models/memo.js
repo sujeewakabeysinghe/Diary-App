@@ -39,7 +39,6 @@ module.exports.editmemoMobileNo=function(memoId,mobileNoM,callback){
 };
 
 module.exports.editmemolandPhoneNo=function(memoId,landPhoneNoM,callback){
-    console.log(landPhoneNoM);
     const query1={_id:memoId};
     const query2={landPhoneNoM:landPhoneNoM};
     Memos.findOneAndUpdate(query1,query2,callback);
