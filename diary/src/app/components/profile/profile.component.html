@@ -169,23 +169,128 @@
   <div *ngIf="show=='memo'">
     <mat-card class="card">
       <mat-card-content>
-        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
-        <div>
-          <p>no memo</p>
-        </div>
+        <form class="example-form">
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput placeholder="Ex : 07X XXX XXXX" type="text" name="mobileNoM" [(ngModel)]="mobileNoM" required>
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Land Phone Number</mat-label>
+              <input matInput placeholder="Ex : 08X XXX XXXX" type="text" name="landPhoneNoM" [(ngModel)]="landPhoneNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Office Number</mat-label>
+              <input matInput placeholder="Ex : 03X XXX XXXX" type="text" name="officeNoM" [(ngModel)]="officeNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Ex : 123/A, ABC Road, Kandy." type="text" name="addressM" [(ngModel)]="addressM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Office Address</mat-label>
+              <input matInput placeholder="Ex : 123/A, ABC Road, Colombo." type="text" name="officeAddressM" [(ngModel)]="officeAddressM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Blood Group</mat-label>
+              <input matInput placeholder="Ex : O+" type="text" name="bloodGroupM" [(ngModel)]="bloodGroupM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Height</mat-label>
+              <input matInput placeholder="Ex : 5'8''" type="text" name="heightM" [(ngModel)]="heightM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Weight</mat-label>
+              <input matInput placeholder="Ex : 62KG" type="text" name="weightM" [(ngModel)]="weightM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>ID Number</mat-label>
+              <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="idNoM" [(ngModel)]="idNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Licence Number</mat-label>
+              <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="licenceNoM" [(ngModel)]="licenceNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Bank Account Number</mat-label>
+              <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="bankAccountNoM" [(ngModel)]="bankAccountNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Passport Number</mat-label>
+              <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="passportNoM" [(ngModel)]="passportNoM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Notes</mat-label>
+              <input matInput type="text" name="notesM" [(ngModel)]="notesM">
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+        </form>
       </mat-card-content>
       <button mat-icon-button *ngIf="!hasMemo"  (click)='memocreate()'>
         <mat-icon>done</mat-icon>
       </button>
+      <button mat-icon-button  (click)='clearmemo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
     </mat-card>
   </div>
+  <!--readmemo-->
   <div *ngIf="show=='readmemo'">
     <mat-card class="card">
       <mat-card-content>
         <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
-        <p>has memo<button mat-icon-button>
-          <mat-icon>build</mat-icon>
-        </button></p>
+        <div>
+          <p>Mobile Number : {{readMemo.mobileNoM}}</p>
+          <p>Land Phone Number : {{readMemo.landPhoneNoM}}</p>
+          <p>Office Number : {{readMemo.officeNoM}}</p>
+          <p>Address : {{readMemo.addressM}}</p>
+          <p>Office Address : {{readMemo.officeAddressM}}</p>
+          <p>Blood Group : {{readMemo.bloodGroupM}}</p>
+          <p>Height : {{readMemo.HeightM}}</p>
+          <p>Weight : {{readMemo.weightM}}</p>
+          <p>ID Number : {{readMemo.idNoM}}</p>
+          <p>Licence Number : {{readMemo.licenceNoM}}</p>
+          <p>Bank Account Number : {{readMemo.bankAccountNoM}}</p>
+          <p>Passport Number : {{readMemo.passportNoM}}</p>
+          <p>Notes : {{readMemo.notesM}}</p>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

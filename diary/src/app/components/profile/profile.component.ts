@@ -35,6 +35,20 @@ export class ProfileComponent implements OnInit {
   hasMemo:boolean;
   readMemo:any;
 
+  mobileNoM:string;
+  landPhoneNoM:string;
+  officeNoM:string;
+  addressM:string;
+  officeAddressM:string;
+  bloodGroupM:string;
+  heightM:string;
+  weightM:string;
+  idNoM:string;
+  licenceNoM:string;
+  bankAccountNoM:string;
+  passportNoM:string;
+  notesM:string;
+
   constructor(
     private authservice:AuthService,
     private flashmessage:NgFlashMessageService,
@@ -155,7 +169,7 @@ export class ProfileComponent implements OnInit {
         }
         else{
           this.flashmessage.showFlashMessage({
-            messages: [res.msg],
+            messages: ['Please Fill Required Fields!'],
             dismissible: false,
             timeout: 2000,
             type: 'warning'
@@ -183,61 +197,100 @@ export class ProfileComponent implements OnInit {
 
   memo(){
     if(this.hasMemo){
-      this.show="readmemo";
+      this.readmemo();
     }
     else{
       this.show="memo";
     }
   }
   memocreate(){
-    this.hasMemo=true;
-    const memo={
-      userId:this.userId,
-      hasMemo:this.hasMemo
-    }
     const memoCreate={
-      userId:this.userId
+      userId:this.userId,
+      mobileNoM:this.mobileNoM,
+      landPhoneNoM:this.landPhoneNoM,
+      officeNoM:this.officeNoM,
+      addressM:this.addressM,
+      officeAddressM:this.officeAddressM,
+      bloodGroupM:this.bloodGroupM,
+      heightM:this.heightM,
+      weightM:this.weightM,
+      idNoM:this.idNoM,
+      licenceNoM:this.licenceNoM,
+      bankAccountNoM:this.bankAccountNoM,
+      passportNoM:this.passportNoM,
+      notesM:this.notesM,
     }
-    this.authservice.edithasmemo(memo).subscribe(res=>{
-      if(res.state){
-        this.authservice.creatememo(memoCreate).subscribe(res=>{
-          if(res.state){
-            this.flashmessage.showFlashMessage({
-              messages: [res.msg],
-              dismissible: false,
-              timeout: 2000,
-              type: 'success'
-            });
-            this.readmemo();
-          }
-          else{
-            this.flashmessage.showFlashMessage({
-              messages: [res.msg],
-              dismissible: false,
-              timeout: 2000,
-              type: 'warning'
-            });
-          }
-        });
+    if(memoCreate.userId==undefined || memoCreate.mobileNoM==undefined || memoCreate.mobileNoM.length==0){
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill Required Fields!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else{
+      this.hasMemo=true;
+      const memo={
+        userId:this.userId,
+        hasMemo:this.hasMemo
       }
-      else{
-        this.flashmessage.showFlashMessage({
-          messages: [res.msg],
-          dismissible: false,
-          timeout: 2000,
-          type: 'warning'
-        });
-      }
-    });
+      this.authservice.edithasmemo(memo).subscribe(res=>{
+        if(res.state){
+          this.authservice.creatememo(memoCreate).subscribe(res=>{
+            if(res.state){
+              this.flashmessage.showFlashMessage({
+                messages: [res.msg],
+                dismissible: false,
+                timeout: 2000,
+                type: 'success'
+              });
+              this.readmemo();
+            }
+            else{
+              this.flashmessage.showFlashMessage({
+                messages: [res.msg],
+                dismissible: false,
+                timeout: 2000,
+                type: 'warning'
+              });
+            }
+          });
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
   }
   readmemo(){
+    console.log("read works!");
     this.show="readmemo";
     this.authservice.readmemo().subscribe(res=>{
-      this.readMemo=res.memo;
-      console.log(res.memo);
+      console.log(res);
+      this.readMemo=res.memo[0];
+      console.log(this.readMemo);
     });
   }
-
+  clearmemo(){
+    this.mobileNoM="";
+    this.landPhoneNoM="";
+    this.officeNoM="";
+    this.addressM="";
+    this.officeAddressM="";
+    this.bloodGroupM="";
+    this.heightM="";
+    this.weightM="";
+    this.idNoM="";
+    this.licenceNoM="";
+    this.bankAccountNoM="";
+    this.passportNoM="";
+    this.notesM="";
+  }
 
 
 

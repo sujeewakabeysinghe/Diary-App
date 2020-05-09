@@ -92,6 +92,7 @@ export class AuthService {
   }
 
   readmemo(){
+    console.log("auth works!");
     const token=localStorage.getItem('Token');
     let headers=new Headers();
     headers.append('Authorization',token);
