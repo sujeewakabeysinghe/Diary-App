@@ -47,5 +47,57 @@ Router.get("/readmemo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
     });
 });
 
+Router.post("/editmemoMobileNo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const memoId=req.body.memoId;
+    const mobileNoM=req.body.mobileNoM;
+    Memo.editmemoMobileNo(memoId,mobileNoM,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Update!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
+
+Router.post("/editmemolandPhoneNo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const memoId=req.body.memoId;
+    const landPhoneNoM=req.body.landPhoneNoM;
+    console.log(landPhoneNoM);
+    Memo.editmemolandPhoneNo(memoId,landPhoneNoM,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Update!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
+
+Router.post("/editmemoofficeNo",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const memoId=req.body.memoId;
+    const officeNoM=req.body.officeNoM;
+    Memo.editmemoofficeNo(memoId,officeNoM,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Update!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
+
+Router.post("/editmemoaddress",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const memoId=req.body.memoId;
+    const addressM=req.body.addressM;
+    Memo.editmemoaddress(memoId,addressM,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Update!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Updated!"});
+      }
+    });
+});
 
 module.exports=Router;

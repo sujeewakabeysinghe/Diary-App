@@ -21,20 +21,15 @@ export class ProfileComponent implements OnInit {
   notes:string;
   day:any;
   contact:any;
-  firstName:string;
-  lastName:string;
-  company:string;
-  mobileNo:string;
-  landPhoneNo:string;
-  officeNo:string;
-  email:string;
-  website:string;
-  address:string;
-  note:string;
+
+  fullName:string;
+  contactNo:string;
+
   editedUserName:string;
   hasMemo:boolean;
 
   readMemo:any;
+  memoId:string;
 
   mobileNoM:string;
   landPhoneNoM:string;
@@ -49,6 +44,20 @@ export class ProfileComponent implements OnInit {
   bankAccountNoM:string;
   passportNoM:string;
   notesM:string;
+
+  mobileNoME:string;
+  landPhoneNoME:string;
+  officeNoME:string;
+  addressME:string;
+  // officeAddressM:string;
+  // bloodGroupM:string;
+  // heightM:string;
+  // weightM:string;
+  // idNoM:string;
+  // licenceNoM:string;
+  // bankAccountNoM:string;
+  // passportNoM:string;
+  // notesM:string;
 
   constructor(
     private authservice:AuthService,
@@ -137,18 +146,10 @@ export class ProfileComponent implements OnInit {
   addcontact(){
     const contact={
       userId:this.userId,
-      firstName:this.firstName,
-      lastName:this.lastName,
-      company:this.company,
-      mobileNo:this.mobileNo,
-      landPhoneNo:this.landPhoneNo,
-      officeNo:this.officeNo,
-      email:this.email,
-      website:this.website,
-      address:this.address,
-      notes:this.note
+      fullName:this.fullName,
+      contactNo:this.contactNo,
     }
-    if(contact.userId==undefined || contact.firstName==undefined){
+    if(contact.userId==undefined || contact.fullName==undefined || contact.contactNo==undefined){
       this.flashmessage.showFlashMessage({
         messages: ['Please Fill Required Fields!'],
         dismissible: false,
@@ -180,16 +181,8 @@ export class ProfileComponent implements OnInit {
     }
   }
   clearcontact(){
-    this.firstName="";
-    this.lastName="";
-    this.company="";
-    this.mobileNo="";
-    this.landPhoneNo="";
-    this.officeNo="";
-    this.email="";
-    this.website="";
-    this.address="";
-    this.note="";
+    this.fullName="";
+    this.contactNo="";
   }
 
 
@@ -199,6 +192,10 @@ export class ProfileComponent implements OnInit {
   memo(){
     if(this.hasMemo){
       this.readmemo();
+      this.mobileNoME="";
+      this.landPhoneNoME="";
+      this.officeNoME="";
+      this.addressME="";
     }
     else{
       this.show="memo";
@@ -221,9 +218,9 @@ export class ProfileComponent implements OnInit {
       passportNoM:this.passportNoM,
       notesM:this.notesM,
     }
-    if(memoCreate.userId==undefined || memoCreate.mobileNoM==undefined || memoCreate.mobileNoM.length==0){
+    if(memoCreate.userId==undefined){
       this.flashmessage.showFlashMessage({
-        messages: ['Please Fill Required Fields!'],
+        messages: ['Something Went Wrong!'],
         dismissible: false,
         timeout: 2000,
         type: 'warning'
@@ -272,6 +269,7 @@ export class ProfileComponent implements OnInit {
     this.show="readmemo";
     this.authservice.readmemo().subscribe(res=>{
       this.readMemo=res.memo;
+      this.memoId=res.memo[0]._id
     });
   }
   clearmemo(){
@@ -289,6 +287,95 @@ export class ProfileComponent implements OnInit {
     this.passportNoM="";
     this.notesM="";
   }
+
+  editmemoMobileNo(){
+    this.show="editmemoMobileNo";
+  }
+  memoMobileNo(){
+    const editMemo={
+      memoId:this.memoId,
+      mobileNoM:this.mobileNoME
+    }
+    if(editMemo.memoId==undefined || editMemo.mobileNoM.indexOf(' ')>=0 || editMemo.mobileNoM==""){
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill Mobile Number!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else{
+      this.authservice.editmemoMobileNo(editMemo).subscribe(res=>{
+        if(res.state){
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
+          this.mobileNoM=this.mobileNoME;
+          this.memo();
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
+  }
+
+  editmemoLandPhoneNo(){
+    this.show="editmemoLandPhoneNo";
+  }
+  memoLandPhoneNo(){
+    const editMemo={
+      memoId:this.memoId,
+      landPhoneNoM:this.landPhoneNoME
+    }
+    if(editMemo.memoId==undefined || editMemo.landPhoneNoM.indexOf(' ')>=0 || editMemo.landPhoneNoM==""){
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill Mobile Number!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else{
+      this.authservice.editmemoLandPhoneNo(editMemo).subscribe(res=>{
+        if(res.state){
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
+          this.landPhoneNoM=this.landPhoneNoME;
+          this.memo();
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
+  }
+
+
+
+
+
+
+
+
+
 
 
 

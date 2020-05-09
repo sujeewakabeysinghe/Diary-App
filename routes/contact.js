@@ -15,16 +15,8 @@ Router.use(function(req, res, next) {
 Router.post("/createcontact",(req,res)=>{
     const NewContact=new Contact({
         userId:req.body.userId,
-        firstName:req.body.firstName,
-        lastName:req.body.lastName,
-        company:req.body.company,
-        mobileNo:req.body.mobileNo,
-        landPhoneNo:req.body.landPhoneNo,
-        officeNo:req.body.officeNo,
-        email:req.body.email,
-        website:req.body.website,
-        address:req.body.address,
-        notes:req.body.notes
+        fullName:req.body.fullName,
+        contactNo:req.body.contactNo
     });
     Contact.createcontact(NewContact,(err,user)=>{
         if(err){

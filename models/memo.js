@@ -31,3 +31,28 @@ module.exports.getmemobyuserid=function(userid,callback){
     const query={userId:userid};
     Memos.find(query,callback);
 };
+
+module.exports.editmemoMobileNo=function(memoId,mobileNoM,callback){
+    const query1={_id:memoId};
+    const query2={mobileNoM:mobileNoM};
+    Memos.findOneAndUpdate(query1,query2,callback);
+};
+
+module.exports.editmemolandPhoneNo=function(memoId,landPhoneNoM,callback){
+    console.log(landPhoneNoM);
+    const query1={_id:memoId};
+    const query2={landPhoneNoM:landPhoneNoM};
+    Memos.findOneAndUpdate(query1,query2,callback);
+};
+
+module.exports.editmemoofficeNo=function(memoId,officeNoM,callback){
+    const query1={_id:memoId};
+    const query2={officeNoM:officeNoM};
+    Memos.findOneAndUpdate(query1,query2,callback);
+};
+
+module.exports.editmemoaddress=function(memoId,addressM,callback){
+    const query1={_id:memoId};
+    const query2={addressM:addressM};
+    Memos.findOneAndUpdate(query1,query2,callback);
+};

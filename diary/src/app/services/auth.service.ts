@@ -98,4 +98,21 @@ export class AuthService {
     return this.http.get('http://localhost:3000/memo/readmemo',{headers:headers}).pipe(map(res=>res.json()));
   }
 
+  editmemoMobileNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoMobileNo',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoLandPhoneNo(memo:any){
+    console.log("workafsffa")
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemolandPhoneNo',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
 }

@@ -66,16 +66,9 @@
   <div *ngIf="show=='contacts'">
     <mat-card class="card" *ngFor="let contacts of contact">
       <mat-card-content>
-        <mat-card-subtitle class="date">{{contacts.firstName}} {{contacts.lastName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <mat-card-subtitle class="date">{{contacts.fullName}}</mat-card-subtitle><hr style="opacity: 10%;">
         <div>
-          <p>Mobile Number : {{contacts.mobileNo}}</p>
-          <p>Land Phone Number : {{contacts.landPhoneNo}}</p>
-          <p>Office Number : {{contacts.officeNo}}</p>
-          <p>E-Mail : {{contacts.email}}</p>
-          <p>Address : {{contacts.address}}</p>
-          <p>Company : {{contacts.company}}</p>
-          <p>Website : {{contacts.website}}</p>
-          <p>Notes : {{contacts.notes}}</p>
+          <p>contact Number : {{contacts.contactNo}}</p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -87,71 +80,15 @@
         <form class="example-form">
           <div>
             <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>First Name</mat-label>
-              <input matInput placeholder="Ex : Will" type="text" name="firstName" [(ngModel)]="firstName" required>
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Ex : Will Smith" type="text" name="fullName" [(ngModel)]="fullName" required>
               <!--<mat-hint>Hint</mat-hint>-->
             </mat-form-field>
           </div>
           <div>
             <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Last Name</mat-label>
-              <input matInput placeholder="Ex : Smith" type="text" name="lastName" [(ngModel)]="lastName">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Mobile Number</mat-label>
-              <input matInput placeholder="Ex : 07X XXX XXXX" type="text" name="mobileNo" [(ngModel)]="mobileNo">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Land Phone Number</mat-label>
-              <input matInput placeholder="Ex : 08X XXX XXXX" type="text" name="landPhoneNo" [(ngModel)]="landPhoneNo">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Office Number</mat-label>
-              <input matInput placeholder="Ex : 03X XXX XXXX" type="text" name="officeNo" [(ngModel)]="officeNo">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>E-Mail</mat-label>
-              <input matInput placeholder="Ex : willsmith@gmail.com" type="email" name="email" [(ngModel)]="email">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Address</mat-label>
-              <input matInput placeholder="Ex : 123/A, ABC Road, Kandy." type="text" name="address" [(ngModel)]="address">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Company</mat-label>
-              <input matInput placeholder="Ex : ABC (Pvt.) Ltd." type="text" name="company" [(ngModel)]="company">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Website</mat-label>
-              <input matInput placeholder="Ex : www.ABC.com" type="text" name="website" [(ngModel)]="website">
-              <!--<mat-hint>Hint</mat-hint>-->
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Notes</mat-label>
-              <input matInput type="text" name="note" [(ngModel)]="note">
+              <mat-label>Contact Number</mat-label>
+              <input matInput placeholder="Ex : 0XX XXX XXXX" type="text" name="contactNo" [(ngModel)]="contactNo" required>
               <!--<mat-hint>Hint</mat-hint>-->
             </mat-form-field>
           </div>
@@ -173,7 +110,7 @@
           <div>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Mobile Number</mat-label>
-              <input matInput placeholder="Ex : 07X XXX XXXX" type="text" name="mobileNoM" [(ngModel)]="mobileNoM" required>
+              <input matInput placeholder="Ex : 07X XXX XXXX" type="text" name="mobileNoM" [(ngModel)]="mobileNoM">
               <!--<mat-hint>Hint</mat-hint>-->
             </mat-form-field>
           </div>
@@ -277,9 +214,9 @@
       <mat-card-content>
         <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
         <div>
-          <p>Mobile Number : {{readMemo.mobileNoM}}</p>
-          <p>Land Phone Number : {{readMemo.landPhoneNoM}}</p>
-          <p>Office Number : {{readMemo.officeNoM}}</p>
+          <p>Mobile Number : {{readMemo.mobileNoM}} <button mat-icon-button  (click)='editmemoMobileNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Land Phone Number : {{readMemo.landPhoneNoM}} <button mat-icon-button   (click)='editmemoLandPhoneNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Office Number : {{readMemo.officeNoM}} <button mat-icon-button><mat-icon>build</mat-icon></button></p>
           <p>Address : {{readMemo.addressM}}</p>
           <p>Office Address : {{readMemo.officeAddressM}}</p>
           <p>Blood Group : {{readMemo.bloodGroupM}}</p>
@@ -294,6 +231,53 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+
+  <div *ngIf="show=='editmemoMobileNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput placeholder="Ex : 07X XXX XXXX" type="text" name="mobileNoME" [(ngModel)]="mobileNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoMobileNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoLandPhoneNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Land Phone Number</mat-label>
+            <input matInput placeholder="Ex : 08X XXX XXXX" type="text" name="landPhoneNoME" [(ngModel)]="landPhoneNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoLandPhoneNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+
+
+
+
+
   <!--profile-->
   <div *ngIf="show=='profile'">
     <mat-card class="card">
