@@ -36,5 +36,16 @@ Router.get("/readcontact",Passport.authenticate('jwt',{session:false}),(req,res)
     });
 });
 
+Router.post("/deletecontact",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const contactId=req.body.contactId;
+    Contact.deletecontact(contactId,(err,user)=>{
+      if(err){
+        res.json({state:false,msg:"Failed To Delete!"});
+      }
+      else{
+        res.json({state:true,msg:"Successfully Deleted!"});
+      }
+    });
+  });
 
 module.exports=Router;

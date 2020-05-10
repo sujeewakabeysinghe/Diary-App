@@ -68,7 +68,7 @@
       <mat-card-content>
         <mat-card-subtitle class="date">{{contacts.fullName}}</mat-card-subtitle><hr style="opacity: 10%;">
         <div>
-          <p>contact Number : {{contacts.contactNo}}</p>
+          <p>contact Number : {{contacts.contactNo}} <button mat-icon-button (click)='deletecontact(contacts._id)'><mat-icon>delete</mat-icon></button></p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -152,7 +152,7 @@
           <div>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Height</mat-label>
-              <input matInput placeholder="Ex : 5'8''" type="text" name="heightM" [(ngModel)]="heightM">
+              <input matInput placeholder="Ex : 6'2''" type="text" name="heightM" [(ngModel)]="heightM">
               <!--<mat-hint>Hint</mat-hint>-->
             </mat-form-field>
           </div>
@@ -216,17 +216,17 @@
         <div>
           <p>Mobile Number : {{readMemo.mobileNoM}} <button mat-icon-button  (click)='editmemoMobileNo()'><mat-icon>build</mat-icon></button></p>
           <p>Land Phone Number : {{readMemo.landPhoneNoM}} <button mat-icon-button   (click)='editmemoLandPhoneNo()'><mat-icon>build</mat-icon></button></p>
-          <p>Office Number : {{readMemo.officeNoM}} <button mat-icon-button><mat-icon>build</mat-icon></button></p>
-          <p>Address : {{readMemo.addressM}}</p>
-          <p>Office Address : {{readMemo.officeAddressM}}</p>
-          <p>Blood Group : {{readMemo.bloodGroupM}}</p>
-          <p>Height : {{readMemo.HeightM}}</p>
-          <p>Weight : {{readMemo.weightM}}</p>
-          <p>ID Number : {{readMemo.idNoM}}</p>
-          <p>Licence Number : {{readMemo.licenceNoM}}</p>
-          <p>Bank Account Number : {{readMemo.bankAccountNoM}}</p>
-          <p>Passport Number : {{readMemo.passportNoM}}</p>
-          <p>Notes : {{readMemo.notesM}}</p>
+          <p>Office Number : {{readMemo.officeNoM}} <button mat-icon-button (click)='editmemoOfficeNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Address : {{readMemo.addressM}} <button mat-icon-button (click)='editmemoAddress()'><mat-icon>build</mat-icon></button></p>
+          <p>Office Address : {{readMemo.officeAddressM}} <button mat-icon-button (click)='editmemoOfficeAddress()'><mat-icon>build</mat-icon></button></p>
+          <p>Blood Group : {{readMemo.bloodGroupM}} <button mat-icon-button (click)='editmemoBloodGroup()'><mat-icon>build</mat-icon></button></p>
+          <p>Height : {{readMemo.heightM}} <button mat-icon-button (click)='editmemoHeight()'><mat-icon>build</mat-icon></button></p>
+          <p>Weight : {{readMemo.weightM}} <button mat-icon-button (click)='editmemoWeight()'><mat-icon>build</mat-icon></button></p>
+          <p>ID Number : {{readMemo.idNoM}} <button mat-icon-button (click)='editmemoIdNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Licence Number : {{readMemo.licenceNoM}} <button mat-icon-button (click)='editmemoLicenceNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Bank Account Number : {{readMemo.bankAccountNoM}} <button mat-icon-button (click)='editmemoBankAccountNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Passport Number : {{readMemo.passportNoM}} <button mat-icon-button (click)='editmemoPassportNo()'><mat-icon>build</mat-icon></button></p>
+          <p>Notes : {{readMemo.notesM}} <button mat-icon-button (click)='editmemoNotes()'><mat-icon>build</mat-icon></button></p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -266,6 +266,226 @@
         </div>
       </mat-card-content>
       <button mat-icon-button  (click)='memoLandPhoneNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoOfficeNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Office Number</mat-label>
+            <input matInput placeholder="Ex : 03X XXX XXXX" type="text" name="officeNoME" [(ngModel)]="officeNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoOfficeNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoAddress'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Ex : 123/A, ABC Road, Kandy." type="text" name="addressME" [(ngModel)]="addressME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoAddress()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoOfficeAddress'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Office Address</mat-label>
+            <input matInput placeholder="Ex : 123/A, ABC Road, Colombo." type="text" name="officeAddressME" [(ngModel)]="officeAddressME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoOfficeAddress()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoBloodGroup'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Blood Group</mat-label>
+            <input matInput placeholder="Ex : O+" type="text" name="bloodGroupME" [(ngModel)]="bloodGroupME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoBloodGroup()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoHeight'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Height</mat-label>
+            <input matInput placeholder="Ex : 6'2''" type="text" name="heightME" [(ngModel)]="heightME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoHeight()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoWeight'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input matInput placeholder="Ex : 62KG" type="text" name="weightME" [(ngModel)]="weightME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoWeight()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoIdNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>ID Number</mat-label>
+            <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="idNoME" [(ngModel)]="idNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoID()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoLicenceNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Licence Number</mat-label>
+            <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="licenceNoME" [(ngModel)]="licenceNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoLicenceNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoBankAccountNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Bank Account Number</mat-label>
+            <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="bankAccountNoME" [(ngModel)]="bankAccountNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoBankAccountNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoPassportNo'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Passport Number</mat-label>
+            <input matInput placeholder="Ex : XXXXXXXXXX" type="text" name="passportNoME" [(ngModel)]="passportNoME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoPassportNo()'>
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button  (click)='memo()'>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div *ngIf="show=='editmemoNotes'">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-subtitle class="date">{{userName}}</mat-card-subtitle><hr style="opacity: 10%;">
+        <div>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <input matInput type="text" name="notesME" [(ngModel)]="notesME" required>
+            <!--<mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <button mat-icon-button  (click)='memoNotes()'>
         <mat-icon>done</mat-icon>
       </button>
       <button mat-icon-button  (click)='memo()'>

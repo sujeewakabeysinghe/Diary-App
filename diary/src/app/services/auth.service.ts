@@ -114,4 +114,100 @@ export class AuthService {
     return this.http.post('http://localhost:3000/memo/editmemolandPhoneNo',memo,{headers:headers}).pipe(map(res=>res.json()));
   }
 
+  editmemoOfficeNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoofficeNo',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoAddress(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoaddress',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoOfficeAddress(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoofficeaddress',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoBlooGroup(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemobloodgroup',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoHeight(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoheight',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoWeight(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoweight',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoIdNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemoid',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  memoLicenceNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemolicence',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoBankAccountNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemobankaccount',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoPassportNo(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemopassport',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  editmemoNotes(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/memo/editmemonotes',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  deletecontact(memo:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/contact/deletecontact',memo,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
 }

@@ -21,3 +21,8 @@ module.exports.getcontactsbyuserid=function(userid,callback){
     const query={userId:userid};
     Contacts.find(query,callback);
 };
+
+module.exports.deletecontact=function(contactId,callback){
+    const query1={_id:contactId};
+    Contacts.deleteOne(query1,callback);
+};
