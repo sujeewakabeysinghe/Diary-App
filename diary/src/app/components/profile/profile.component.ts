@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   iconname=true;
-  pickdate:string;
+  search:string;
   show:string;
   userId:string;
   userName:string;

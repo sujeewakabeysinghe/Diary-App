@@ -73,6 +73,17 @@
       </mat-card-content>
     </mat-card>
   </div>
+    <!--searchcontacts-->
+    <div *ngIf="show=='searchcontacts'">
+      <mat-card class="card" *ngFor="let contacts of contact">
+        <mat-card-content>
+          <mat-card-subtitle class="date">{{contacts.fullName}}</mat-card-subtitle><hr style="opacity: 10%;">
+          <div>
+            <p>contact Number : {{contacts.contactNo}} <button mat-icon-button (click)='deletecontact(contacts._id)'><mat-icon>delete</mat-icon></button></p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   <!--createcontacts-->
   <div *ngIf="show=='createcontacts'">
     <mat-card class="card">
