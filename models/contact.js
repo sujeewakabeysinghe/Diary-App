@@ -23,6 +23,6 @@ module.exports.getcontactsbyuserid=function(userid,callback){
 };
 
 module.exports.deletecontact=function(contactId,callback){
-    const query1={_id:contactId};
-    Contacts.deleteOne(query1,callback);
+    const query={_id:contactId};
+    Contacts.deleteOne(query,callback);
 };

@@ -129,7 +129,51 @@ export class ProfileComponent implements OnInit {
   readday(){
     this.authservice.readday().subscribe(res=>{
       this.day=res.day;
+      if(this.day.length==0){
+        this.emphtymessaged();
+      }
+      else{
+        console.log("YYYYYY");
+      }
     });
+  }
+  emphtymessaged(){
+    this.show="emphtymessaged";
+    console.log("ddddddd");
+  }
+  deleteday(dayId:any){
+    const day={
+      dayId:dayId
+    }
+    if(day.dayId==undefined){
+      this.flashmessage.showFlashMessage({
+        messages: ['Something Went Wrong!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else{
+      this.authservice.deleteday(day).subscribe(res=>{
+        if(res.state){
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
+          this.read();
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
   }
 
   contacts(){
@@ -139,7 +183,17 @@ export class ProfileComponent implements OnInit {
   readcontact(){
     this.authservice.readcontact().subscribe(res=>{
       this.contact=res.contact;
+      if(this.contact.length==0){
+        this.emphtymessagec();
+      }
+      else{
+        console.log("XXXXXXX");
+      }
     });
+  }
+  emphtymessagec(){
+    this.show="emphtymessagec";
+    console.log("0000000");
   }
   createcontact(){
     this.show="createcontacts";

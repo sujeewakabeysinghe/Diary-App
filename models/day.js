@@ -21,3 +21,8 @@ module.exports.getdaysbyuserid=function(userid,callback){
     const query={userId:userid};
     Days.find(query,callback);
 };
+
+module.exports.deleteday=function(dayId,callback){
+    const query={_id:dayId};
+    Days.deleteOne(query,callback);
+};

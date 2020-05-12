@@ -202,12 +202,20 @@ export class AuthService {
     return this.http.post('http://localhost:3000/memo/editmemonotes',memo,{headers:headers}).pipe(map(res=>res.json()));
   }
 
-  deletecontact(memo:any){
+  deletecontact(contact:any){
     const token=localStorage.getItem('Token');
     let headers=new Headers();
     headers.append('Authorization',token);
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/contact/deletecontact',memo,{headers:headers}).pipe(map(res=>res.json()));
+    return this.http.post('http://localhost:3000/contact/deletecontact',contact,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
+  deleteday(day:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/day/deleteday',day,{headers:headers}).pipe(map(res=>res.json()));
   }
 
 }

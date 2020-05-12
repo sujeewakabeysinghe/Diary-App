@@ -46,6 +46,6 @@ Router.post("/deletecontact",Passport.authenticate('jwt',{session:false}),(req,r
         res.json({state:true,msg:"Successfully Deleted!"});
       }
     });
-  });
+});
 
 module.exports=Router;
