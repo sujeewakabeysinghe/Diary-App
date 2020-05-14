@@ -536,6 +536,7 @@
     </mat-card>
   </div>
 
+  <!--editusename-->
   <div *ngIf="show=='editprofile'">
     <mat-card class="card">
       <mat-card-content>
@@ -555,5 +556,26 @@
       </button>
     </mat-card>
   </div>
+
+    <!--editusename-->
+    <div *ngIf="show=='editprofile'">
+      <mat-card class="card">
+        <mat-card-content>
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label class="card-header">Username</mat-label>
+              <input class="card-body" matInput placeholder="Ex : Smith" type="text" name="editedUserName" [(ngModel)]="editedUserName" required>
+              <!--<mat-hint>Hint</mat-hint>-->
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <button mat-icon-button matTooltip="Submit" matTooltipClass="example-tooltip-green" style="color: rgb(5, 197, 66);" (click)='saveprofile()'>
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Cancel" matTooltipClass="example-tooltip-red" style="color: #f44336" (click)='profile()'>
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-card>
+    </div>
 
 </mat-drawer-container>
