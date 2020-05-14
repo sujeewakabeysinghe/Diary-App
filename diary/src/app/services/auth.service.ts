@@ -218,4 +218,12 @@ export class AuthService {
     return this.http.post('http://localhost:3000/day/deleteday',day,{headers:headers}).pipe(map(res=>res.json()));
   }
 
+  savepassword(user:any){
+    const token=localStorage.getItem('Token');
+    let headers=new Headers();
+    headers.append('Authorization',token);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/user/editpassword',user,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
 }

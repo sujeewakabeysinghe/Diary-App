@@ -63,7 +63,6 @@ module.exports.edithasmemo=function(id,hasMemo,callback){
 };
 
 module.exports.editpassword=function(id,newPassword,callback){
-
     Bcrypt.genSalt(10,(err,salt)=>{
         Bcrypt.hash(newPassword,salt,(err,hash)=>{
             if(err) throw err;

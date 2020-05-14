@@ -29,6 +29,10 @@ export class ProfileComponent implements OnInit {
   editedUserName:string;
   hasMemo:boolean;
 
+  oldPassword:string;
+  newPassword:string;
+  cnewPassword:string;
+
   readMemo:any;
   memoId:string;
 
@@ -918,6 +922,9 @@ export class ProfileComponent implements OnInit {
   profile(){
     this.show="profile";
     this.editedUserName="";
+    this.oldPassword="";
+    this.newPassword="";
+    this.cnewPassword="";
   }
   editprofile(){
     this.show="editprofile";
@@ -955,6 +962,53 @@ export class ProfileComponent implements OnInit {
             type: 'warning'
           });
         }
+      });
+    }
+  }
+
+  editpassword(){
+    this.show="editpassword";
+  }
+  savepassword(){
+    const editUser={
+      oldPassword:this.oldPassword,
+      newPassword:this.newPassword
+    }
+    if(this.oldPassword.length==0 || this.newPassword.length==0 || this.cnewPassword.length==0){
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill All Feilds!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else if(this.newPassword==this.cnewPassword){
+      this.authservice.savepassword(editUser).subscribe(res=>{
+        if(res.state){
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
+          this.profile();
+        }
+        else{
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
+        }
+      });
+    }
+    else{
+      this.flashmessage.showFlashMessage({
+        messages: ['Passwords Did Not Match!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
       });
     }
   }
