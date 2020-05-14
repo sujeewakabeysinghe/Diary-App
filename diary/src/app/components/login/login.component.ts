@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authservice:AuthService,
     private flashmessage:NgFlashMessageService,
-    private router:Router
+    private router:Router,
+    private toastr:ToastrService
   ) { }
 
   ngOnInit() {
@@ -29,34 +31,19 @@ export class LoginComponent implements OnInit {
       email:this.email,
       password:this.password
     }
-    if(user.email==undefined || user.password==undefined){
-      this.flashmessage.showFlashMessage({
-        messages: ['Please Fill All Feilds!'],
-        dismissible: false,
-        timeout: 2000,
-        type: 'warning'
-      });
+    if(user.email.length==0 || user.password.length==0){
+      this.toastr.info('You Did Not Add Anything','Please Fill All Feilds!');
       this.router.navigate(['./login']);
     }
     else{
       this.authservice.loguser(user).subscribe(res=>{
         if(res.state){
-          this.flashmessage.showFlashMessage({
-            messages: [res.msg],
-            dismissible: false,
-            timeout: 2000,
-            type: 'success'
-          });
+          this.toastr.success('Successfully logged In',res.msg);
           this.authservice.storeuser(res.token);
           this.router.navigate(['./profile']);
         }
         else{
-          this.flashmessage.showFlashMessage({
-            messages: [res.msg],
-            dismissible: false,
-            timeout: 2000,
-            type: 'warning'
-          });
+          this.toastr.warning('Enter Your Password Again',res.msg);
           this.router.navigate(['./login']);
         }
       });
