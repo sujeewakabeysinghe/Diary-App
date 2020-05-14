@@ -132,14 +132,10 @@ export class ProfileComponent implements OnInit {
       if(this.day.length==0){
         this.emphtymessaged();
       }
-      else{
-        console.log("YYYYYY");
-      }
     });
   }
   emphtymessaged(){
     this.show="emphtymessaged";
-    console.log("ddddddd");
   }
   deleteday(dayId:any){
     const day={
@@ -186,14 +182,10 @@ export class ProfileComponent implements OnInit {
       if(this.contact.length==0){
         this.emphtymessagec();
       }
-      else{
-        console.log("XXXXXXX");
-      }
     });
   }
   emphtymessagec(){
     this.show="emphtymessagec";
-    console.log("0000000");
   }
   createcontact(){
     this.show="createcontacts";

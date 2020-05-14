@@ -61,3 +61,16 @@ module.exports.edithasmemo=function(id,hasMemo,callback){
     const query2={hasMemo:hasMemo};
     Users.findOneAndUpdate(query1,query2,callback);
 };
+
+module.exports.editpassword=function(id,newPassword,callback){
+
+    Bcrypt.genSalt(10,(err,salt)=>{
+        Bcrypt.hash(newPassword,salt,(err,hash)=>{
+            if(err) throw err;
+            const password=hash;
+            const query1={_id:id};
+            const query2={password:password};
+            Users.findOneAndUpdate(query1,query2,callback);
+        });
+    });
+};

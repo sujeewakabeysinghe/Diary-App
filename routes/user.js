@@ -85,5 +85,27 @@ Router.post("/edithasmemo",Passport.authenticate('jwt',{session:false}),(req,res
     });
 });
 
+Router.post("/editpassword",Passport.authenticate('jwt',{session:false}),(req,res)=>{
+    const oldPassword=req.body.oldPassword;
+    const newPassword=req.body.newPassword;
+    const hashPassword=req.user.password;
+    const userId=req.user._id;
+    User.checkpassword(oldPassword,hashPassword,(err,match)=>{
+        if(err) throw err;
+        if(match){
+            User.editpassword(userId,newPassword,(err,user)=>{
+                if(err){
+                    res.json({state:false,msg:"Failed To Update!"});
+                }
+                else{
+                    res.json({state:true,msg:"Successfully Updated!"});
+                }
+            });
+        }
+        else{
+            res.json({state:false,msg:"Wrong Password!"});
+        }
+    });
+});
 
 module.exports=Router; 

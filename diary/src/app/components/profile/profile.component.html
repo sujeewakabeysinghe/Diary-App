@@ -27,6 +27,8 @@
       </button>
     </div>
   </mat-drawer>
+
+
   <button class="buttonT" mat-icon-button disableRipple color="primary" (click)="drawer.toggle()">
     <mat-icon (click)="iconname = !iconname">{{iconname ? 'menu' : 'menu_open'}}</mat-icon>
   </button>
@@ -37,13 +39,21 @@
     <mat-icon>add_ic_call</mat-icon>
   </button>
 
+
+  <button style="width:0px;" class="button" disableRipple mat-icon-button disabled *ngIf="show=='write'">
+      <input matInput [matDatepicker]="picker" disabled>
+      <mat-datepicker-toggle matTooltip="Calender" matTooltipClass="example-tooltip-yellow" [for]="picker" style="color: #3f51b5;" disableRipple></mat-datepicker-toggle>
+      <mat-datepicker touchUi  #picker disabled="false" disableRipple></mat-datepicker>
+  </button>
+
+
   <!--write-->
   <div *ngIf="show=='write'">
     <mat-card class="card">
+      <mat-card-subtitle class="card-header">HOW'S TODAY?</mat-card-subtitle>
       <mat-card-content>
         <mat-form-field class="write" appearance="outline">
-          <mat-label class="card-header">{{date}}</mat-label>
-          <textarea matInput class="card-body" placeholder="How's Today?" type="text" name="day" [(ngModel)]="notes" required></textarea>
+          <textarea matInput class="card-body" type="text" name="day" [(ngModel)]="notes" required></textarea>
         </mat-form-field>
       </mat-card-content>
       <button mat-icon-button matTooltip="Submit" matTooltipClass="example-tooltip-green" style="color: rgb(5, 197, 66);" (click)='writeday()'>

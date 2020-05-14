@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages'; //npm i ng-flash-messages
 import { Router } from '@angular/router';
@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RegisterComponent implements OnInit {
 
@@ -14,6 +15,7 @@ export class RegisterComponent implements OnInit {
   userName:string;
   email:string;
   password:string;
+  cpassword:string;
 
   constructor(
     private authservice:AuthService,
@@ -30,37 +32,49 @@ export class RegisterComponent implements OnInit {
       email:this.email,
       password:this.password
     }
-    if(user.userName==undefined || user.email==undefined || user.password==undefined){
+    if(this.password==this.cpassword){
+      if(user.userName==undefined || user.email==undefined || user.password==undefined){
+        this.flashmessage.showFlashMessage({
+          messages: ['Please Fill All Feilds!'],
+          dismissible: false,
+          timeout: 2000,
+          type: 'warning'
+        });
+        this.router.navigate(['./register']);
+      }
+      else{
+        this.authservice.registeruser(user).subscribe(res=>{
+          if(res.state){
+            this.flashmessage.showFlashMessage({
+              messages: [res.msg],
+              dismissible: false,
+              timeout: 2000,
+              type: 'success'
+            });
+            this.router.navigate(['./login']);
+          }
+          else{
+            this.flashmessage.showFlashMessage({
+              messages: [res.msg],
+              dismissible: false,
+              timeout: 2000,
+              type: 'warning'
+            });
+            this.router.navigate(['./register']);
+          }
+        });
+      }
+    }
+    else{
       this.flashmessage.showFlashMessage({
-        messages: ['Please Fill All Feilds!'],
+        messages: ['Passwords Did Not Match!'],
         dismissible: false,
         timeout: 2000,
         type: 'warning'
       });
-      this.router.navigate(['./register']);
-    }
-    else{
-      this.authservice.registeruser(user).subscribe(res=>{
-        if(res.state){
-          this.flashmessage.showFlashMessage({
-            messages: [res.msg],
-            dismissible: false,
-            timeout: 2000,
-            type: 'success'
-          });
-          this.router.navigate(['./login']);
-        }
-        else{
-          this.flashmessage.showFlashMessage({
-            messages: [res.msg],
-            dismissible: false,
-            timeout: 2000,
-            type: 'warning'
-          });
-          this.router.navigate(['./register']);
-        }
-      });
     }
   }
+  clear(){
 
+  }
 }
