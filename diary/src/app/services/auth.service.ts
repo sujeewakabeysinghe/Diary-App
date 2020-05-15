@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators'; //npm i rxjs-compat
 import { tokenNotExpired } from 'angular2-jwt'; //npm install angular2-jwt
 
 @Injectable({
