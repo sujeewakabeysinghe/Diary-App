@@ -20,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { SearchcontactPipe } from './components/profile/searchcontact.pipe';
+import { SearchdayPipe } from './components/profile/searchday.pipe';
 
 const AppRoutes:Routes=[
   {path:'login',component:LoginComponent},
@@ -36,7 +37,8 @@ const AppRoutes:Routes=[
     LoginComponent,
     ProfileComponent,
     HomeComponent,
-    SearchcontactPipe
+    SearchcontactPipe,
+    SearchdayPipe
   ],
   imports: [
     BrowserModule,

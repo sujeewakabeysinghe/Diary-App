@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   iconname=true;
   search:string;
+  searchdate:string;
   show:string;
   userId:string;
   userName:string;

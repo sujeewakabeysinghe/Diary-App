@@ -33,22 +33,32 @@
     <mat-icon (click)="iconname = !iconname">{{iconname ? 'menu' : 'menu_open'}}</mat-icon>
   </button>
 
-  <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='contacts'" class="button" mat-icon-button color="primary"  (click)='createcontact()'>
+  <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='contacts'" class="buttonT" mat-icon-button color="primary"  (click)='createcontact()'>
     <mat-icon>add_ic_call</mat-icon>
   </button>
-  <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='emphtymessagec'" class="button" mat-icon-button color="primary"  (click)='createcontact()'>
+  <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='emphtymessagec'" class="buttonT" mat-icon-button color="primary"  (click)='createcontact()'>
     <mat-icon>add_ic_call</mat-icon>
   </button>
-  <mat-form-field style="width: auto; margin-left: 30px;" class="button" *ngIf="show=='contacts'">
-    <input placeholder="Search By Name" matInput type="text" name="search" [(ngModel)]="search">
+  <mat-form-field style="margin-left: 35px;" *ngIf="show=='contacts'">
+    <mat-label style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align: center;font-size: medium;">Search By Name</mat-label>
+    <input matInput type="text" placeholder="Ex : Will" name="search" [(ngModel)]="search">
   </mat-form-field>
 
 
-  <button style="width:0px;" class="button" disableRipple mat-icon-button disabled *ngIf="show=='write'">
+  <button style="width:0px;" class="buttonT" disableRipple mat-icon-button disabled *ngIf="show=='write'">
       <input matInput [matDatepicker]="picker" disabled>
       <mat-datepicker-toggle matTooltip="Calender" matTooltipClass="example-tooltip-yellow" [for]="picker" style="color: #3f51b5;" disableRipple></mat-datepicker-toggle>
       <mat-datepicker touchUi  #picker disabled="false" disableRipple></mat-datepicker>
   </button>
+  <button style="width:0px;margin-right: 60px;" class="buttonT" disableRipple mat-icon-button disabled *ngIf="show=='read'">
+    <input matInput [matDatepicker]="picker" disabled>
+    <mat-datepicker-toggle matTooltip="Calender" matTooltipClass="example-tooltip-yellow" [for]="picker" style="color: #3f51b5;" disableRipple></mat-datepicker-toggle>
+    <mat-datepicker touchUi  #picker disabled="false" disableRipple></mat-datepicker>
+</button>
+  <mat-form-field style="margin-left: 35px;" *ngIf="show=='read'">
+    <mat-label style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;text-align: center;font-size: medium;">Search By Date</mat-label>
+    <input matInput type="text" placeholder="Ex : 2020-01-01" name="searchdate" [(ngModel)]="searchdate">
+  </mat-form-field>
 
 
   <!--write-->
@@ -71,7 +81,7 @@
 
   <!--read-->
   <div *ngIf="show=='read'">
-    <mat-card class="card" *ngFor="let days of day">
+    <mat-card class="card" *ngFor="let days of day | searchday:searchdate">
       <mat-card-content>
         <mat-card-subtitle class="card-header">{{days.date}}</mat-card-subtitle>
         <div class="card-body">
