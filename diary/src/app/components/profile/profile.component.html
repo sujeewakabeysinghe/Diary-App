@@ -32,12 +32,16 @@
   <button class="buttonT" mat-icon-button disableRipple color="primary" (click)="drawer.toggle()">
     <mat-icon (click)="iconname = !iconname">{{iconname ? 'menu' : 'menu_open'}}</mat-icon>
   </button>
+
   <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='contacts'" class="button" mat-icon-button color="primary"  (click)='createcontact()'>
     <mat-icon>add_ic_call</mat-icon>
   </button>
   <button matTooltip="Add A New Contact" matTooltipClass="example-tooltip-yellow" disableRipple *ngIf="show=='emphtymessagec'" class="button" mat-icon-button color="primary"  (click)='createcontact()'>
     <mat-icon>add_ic_call</mat-icon>
   </button>
+  <mat-form-field style="width: auto; margin-left: 30px;" class="button" *ngIf="show=='contacts'">
+    <input placeholder="Search By Name" matInput type="text" name="search" [(ngModel)]="search">
+  </mat-form-field>
 
 
   <button style="width:0px;" class="button" disableRipple mat-icon-button disabled *ngIf="show=='write'">
@@ -91,7 +95,7 @@
 
   <!--contacts-->
   <div *ngIf="show=='contacts'">
-    <mat-card class="card" *ngFor="let contacts of contact">
+    <mat-card class="card" *ngFor="let contacts of contact | searchcontact:search">
       <mat-card-content>
         <mat-card-subtitle class="card-header">{{contacts.fullName | uppercase}}</mat-card-subtitle>
         <div class="card-body">
