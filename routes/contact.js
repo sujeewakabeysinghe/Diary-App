@@ -23,7 +23,7 @@ Router.post("/createcontact",(req,res)=>{
             res.json({state:false,msg:"Failed To Save!"});
         }
         else{
-            res.json({state:true,msg:"Successfully Saved!"});
+            res.json({state:true,msg:"Successfully Saved!"})
         }
     });
 });
