@@ -43,7 +43,7 @@ Router.post("/deletecontact",Passport.authenticate('jwt',{session:false}),(req,r
         res.json({state:false,msg:"Failed To Delete!"});
       }
       else{
-        res.json({state:true,msg:"Successfully Deleted!"})
+        res.json({state:true,msg:"Successfully Deleted!"});
       }
     });
 });
