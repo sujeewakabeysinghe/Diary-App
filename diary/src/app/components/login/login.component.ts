@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -19,8 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authservice:AuthService,
     private flashmessage:NgFlashMessageService,
-    private router:Router,
-    private toastr:ToastrService
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -32,18 +29,33 @@ export class LoginComponent implements OnInit {
       password:this.password
     }
     if(user.email.length==0 || user.password.length==0){
-      this.toastr.info('You Did Not Add Anything','Please Fill All Feilds!');
+      this.flashmessage.showFlashMessage({
+        messages: ['Please Fill All Feilds!'],
+        dismissible: false,
+        timeout: 2000,
+        type: 'warning'
+      });
       this.router.navigate(['./login']);
     }
     else{
       this.authservice.loguser(user).subscribe(res=>{
         if(res.state){
-          this.toastr.success('Successfully logged In',res.msg);
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'success'
+          });
           this.authservice.storeuser(res.token);
           this.router.navigate(['./profile']);
         }
         else{
-          this.toastr.warning('Enter Your Password Again',res.msg);
+          this.flashmessage.showFlashMessage({
+            messages: [res.msg],
+            dismissible: false,
+            timeout: 2000,
+            type: 'warning'
+          });
           this.router.navigate(['./login']);
         }
       });
